@@ -28,7 +28,7 @@ func main(){
     
 
 
-  llc:= origin.Sub(horizontal.Div(2)).Sub(vertical.Div(2).Sub(vec3.Init(0,0,focal_length)))
+  llc:= origin.Sub(*horizontal.Div(2)).Sub(*vertical.Div(2).Sub(vec3.Init(0,0,focal_length)))
 
 
 fmt.Fprintf(os.Stdout,"P3\n%d %d\n255\n",image_width,image_height)
@@ -36,9 +36,9 @@ fmt.Fprintf(os.Stdout,"P3\n%d %d\n255\n",image_width,image_height)
     for i:=0;i<image_width;i++{
       
       u:= float64(i)/(image_width-1)
-      v:= float64(j)/(float64(image_height-1))  
+      v:= float64(j) / float64((image_height-1))
       r:= ray.Ray{} 
-      r.Init(origin,llc.Add(horizontal.Mult(u)).Add(vertical.Mult(v)).Sub(origin))
+      r.Init(origin,*llc.Add(*horizontal.Mult(u)).Add(*vertical.Mult(v)).Sub(origin))
       pixelcolor:= ray.RayColor(&r)
       
       pixelcolor.WriteColor()

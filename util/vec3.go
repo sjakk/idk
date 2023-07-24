@@ -62,33 +62,39 @@ func(a* Vec3)Cross(b Vec3)Vec3{
 }
 
 
-func(a Vec3)Add(b Vec3)Vec3{
+func(a Vec3)Add(b Vec3) *Vec3{
   a.X += b.X
   a.Y += b.Y
   a.Z += b.Z
 
-  return a
+  return &a
 }
 
-func(a Vec3)Mult(t float64)Vec3{
-  a.X *= t
-  a.Y *= t
-  a.Z *= t
-
-  return a
+func(a Vec3)Mult(t float64) *Vec3{
+  a.X = t * a.X
+  a.Y = t * a.Y
+  a.Z = t * a.Z
+//same problem like div
+  return &a
 }
 
-func(a Vec3)Div(t float64)Vec3{
-  return a.Mult(1/t)
+func(a Vec3)Div(t float64) *Vec3{
+  
+    a.X = 1/t * a.X  
+    a.Y = 1/t * a.Y
+    a.Z = 1/t * a.Z  
+    return &a
+  
+  // this alternate the order of multiplication test it after -> return a.Mult(1/t)
 }
 
-func(a Vec3)Sub(b Vec3) Vec3{
+func(a Vec3)Sub(b Vec3) *Vec3{
 
   a.X -= b.X
   a.Y -= b.Y
   a.Z -= b.Z
 
-  return a
+  return &a
 }
 
 

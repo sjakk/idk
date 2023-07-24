@@ -36,11 +36,22 @@ func(v* Vec3)Normalize(){
   v.Z = v.Z / len
 }
 
-func(v* Vec3)Dot(b* Vec3) float64{
+func(v* Vec3)UnitVector() Vec3{
+ len:=v.Length()
+  v.X = v.X / len
+  v.Y = v.Y / len
+  v.Z = v.Z / len
+
+  return *v
+}
+
+
+
+func(v* Vec3)Dot(b Vec3) float64{
   return (v.X * b.X) + (v.Y * b.Y) + (v.Z * b.Z)
 }
 
-func(a* Vec3)Cross(b* Vec3)Vec3{
+func(a* Vec3)Cross(b Vec3)Vec3{
   cross:=Init(
     a.Y * b.Z - a.Z * b.Y,
     a.Z * b.X - a.X * b.Z,
@@ -51,26 +62,33 @@ func(a* Vec3)Cross(b* Vec3)Vec3{
 }
 
 
-func(a* Vec3)Add(b* Vec3)Vec3{
+func(a Vec3)Add(b Vec3)Vec3{
   a.X += b.X
   a.Y += b.Y
   a.Z += b.Z
 
-  return *a
+  return a
 }
 
-func(a* Vec3)Mult(t float64)Vec3{
+func(a Vec3)Mult(t float64)Vec3{
   a.X *= t
   a.Y *= t
   a.Z *= t
 
-  return *a
+  return a
 }
 
-func(a* Vec3)Div(t float64)Vec3{
+func(a Vec3)Div(t float64)Vec3{
   return a.Mult(1/t)
 }
 
+func(a Vec3)Sub(b Vec3) Vec3{
 
+  a.X -= b.X
+  a.Y -= b.Y
+  a.Z -= b.Z
+
+  return a
+}
 
 

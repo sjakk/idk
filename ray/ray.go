@@ -1,28 +1,36 @@
-package main
+package ray
 
 import (
-	"fmt"
-	"os"
-  "uka/util"
+	"uka/util"
 )
 
-const(
-  image_width = 256
-  image_height = 256
-)
+type Ray struct{
+Orig  vec3.Vec3
+Dir   vec3.Vec3
 
-func main(){
+}
 
-fmt.Fprintf(os.Stdout,"P3\n%d %d\n255\n",image_width,image_height)
-  for j:= image_height-1;j>=0;j--{
-    for i:=0;i<image_width;i++{
-      
-      color:=vec3.Init(float64(i)/(image_width-1),float64(j)/(image_height-1),0.25)
-      
-        color.WriteColor()
-    }
-  }
+func RayColor(r* Ray) vec3.Vec3{
+    
+  ud:= r.Dir.UnitVector()
+  t:= 0.5*(ud.Y + 1.0)
+    
+  color:=vec3.Init(1.0,1.0,1.0).Add(vec3.Init(0.5,0.7,1.0).Mult(t)).Mult(1.0-t)
 
+  return  color
+}
 
 
+func(v* Ray)Init(orig, dir vec3.Vec3){
+  v.Orig = orig
+  v.Dir = dir
+}
+
+
+func(v* Ray)At(t float64) vec3.Vec3{
+  
+  mult:= v.Dir.Mult(t)
+  add:= v.Orig.Add(mult)
+
+  return add
 }

@@ -10,6 +10,7 @@ type Vec3 struct{
   X float64
   Y float64
   Z float64
+  W float64
 }
 
 func Init(x,y,z float64)Vec3{
@@ -29,6 +30,12 @@ func(v* Vec3)Length() float64{
   return math.Sqrt(len)
 }
 
+func(v* Vec3)LengthWithoutRoot() float64{
+  len:= math.Pow(v.X,2)+ math.Pow(v.Y,2) + math.Pow(v.Z,2)
+
+  return len
+}
+
 func(v* Vec3)Normalize(){
  len:=v.Length()
   v.X = v.X / len
@@ -36,16 +43,33 @@ func(v* Vec3)Normalize(){
   v.Z = v.Z / len
 }
 
-func(v* Vec3)UnitVector() Vec3{
+func(v Vec3)UnitVectorWithoutRoot() Vec3{
+  len:=v.LengthWithoutRoot()
+
+  v.X = v.X / len
+  v.Y = v.Y / len
+  v.Z = v.Z / len
+
+return v
+}
+
+func(v Vec3)UnitVector() Vec3{
  len:=v.Length()
   v.X = v.X / len
   v.Y = v.Y / len
   v.Z = v.Z / len
 
-  return *v
+  return v
 }
 
+func UnitVector(v Vec3) Vec3{
+  len:= v.Length()
+  v.X = v.X / len
+  v.Y = v.Y / len
+  v.Z = v.Z / len
 
+  return v
+}
 
 func(v* Vec3)Dot(b Vec3) float64{
   return (v.X * b.X) + (v.Y * b.Y) + (v.Z * b.Z)

@@ -28,8 +28,7 @@ func main(){
     
 
 
-  llc:= origin.Sub(*horizontal.Div(2)).Sub(*vertical.Div(2).Sub(vec3.Init(0,0,focal_length)))
-
+  llc:= origin.Sub(*horizontal.Div(2.0)).Sub(*vertical.Div(2.0).Sub(vec3.Init(0,0,focal_length)))
 
 fmt.Fprintf(os.Stdout,"P3\n%d %d\n255\n",image_width,image_height)
   for j:= image_height-1;j>=0;j--{

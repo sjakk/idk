@@ -4,4 +4,5 @@ use(
    .
    ./ray
    ./util
+   ./bookshelf/gotemp
    )

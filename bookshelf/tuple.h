@@ -1,5 +1,8 @@
 #include <cmath>
 #include <iostream>
+
+#ifndef __TUPLE__
+#define __TUPLE__
 class Tuple {
 public:
   Tuple(): e{0,0,0}{};
@@ -110,3 +113,4 @@ inline Tuple cross(const Tuple& u, const Tuple& v){
 using point = Tuple;
 using vector = Tuple;
 using color = Tuple;
+#endif
